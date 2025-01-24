@@ -16,7 +16,20 @@ options.add_argument(f"user-data-dir={chrome_profile_path}")
 service = Service(chromedriver_path)
 driver = webdriver.Chrome(service=service, options=options)
 
-post_url = "https://www.instagram.com/p/DFLDoyRuTnH/"
+# Em caso de primeiro login, preencher credenciais
+driver.get("https://www.instagram.com/accounts/login/")
+time.sleep(5)
+
+
+username_input = driver.find_element(By.NAME, "username")
+password_input = driver.find_element(By.NAME, "password")
+username_input.send_keys("USERNAME")
+password_input.send_keys("SENHA")
+password_input.send_keys(Keys.RETURN)
+time.sleep(30)
+#######
+
+post_url = "https://www.instagram.com/p/URL-DO-POST/"
 driver.get(post_url)
 time.sleep(5)
 
